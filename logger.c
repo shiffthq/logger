@@ -35,20 +35,20 @@ static char *format_time(char *buf) {
 #define LOGGER_COLOR_WHITE      "\x1b[37m"
 #define LOGGER_COLOR_RESET      "\x1b[0m"
 
-int logger_init(char *filename, uint8_t level) {
+int logger_init(char *filename, uint8_t options) {
     g_logger.fp = NULL;
-    g_logger.with_color = LOGGER_WITHOUT_COLOR;
+    g_logger.with_color = LOGGER_COLOR_OFF;
 
     g_logger.fp = fopen(filename, "a");
     if (NULL == g_logger.fp) {
         return errno;
     }
 
-    if (1 == isatty(STDOUT_FILENO)) {
-        g_logger.with_color = LOGGER_WITH_COLOR;
+    if (1 == isatty(STDOUT_FILENO) && LOGGER_COLOR_ON == (options & LOGGER_COLOR_MASK)) {
+        g_logger.with_color = LOGGER_COLOR_ON;
     }
 
-    g_logger.level = level;
+    g_logger.level = options & LOGGER_LEVEL_MASK;
 
     return 0;
 }
@@ -67,7 +67,7 @@ int name(const char *format, ...) {                                             
         return 0;                                                                           \
     }                                                                                       \
                                                                                             \
-    if (LOGGER_WITH_COLOR == g_logger.with_color) {                                         \
+    if (LOGGER_COLOR_ON == g_logger.with_color) {                                           \
         fprintf(stdout, color);                                                             \
     }                                                                                       \
                                                                                             \
@@ -81,7 +81,7 @@ int name(const char *format, ...) {                                             
     nwriten += vfprintf(g_logger.fp, format, arg);                                          \
     va_end(arg);                                                                            \
                                                                                             \
-    if (LOGGER_WITH_COLOR == g_logger.with_color) {                                         \
+    if (LOGGER_COLOR_ON == g_logger.with_color) {                                           \
         fprintf(stdout, LOGGER_COLOR_RESET);                                                \
     }                                                                                       \
                                                                                             \
