@@ -1,6 +1,7 @@
 #ifndef __LOGGER_H
 #define __LOGGER_H
 
+#include <stdio.h>
 #include <stdint.h>
 
 /**

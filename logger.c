@@ -10,7 +10,15 @@
 /**
  * global logger context
  */
-static logger_ctx_t g_logger;
+static logger_ctx_t g_logger = {
+    NULL,
+#ifdef DEBUG
+    LOGGER_LEVEL_DEBUG,
+#else
+    LOGGER_LEVEL_INFO,
+#endif
+    LOGGER_COLOR_ON
+};
 
 #define LOGGER_TIMESTAMP_LEN 20
 static char *format_time(char *buf) {
@@ -71,18 +79,20 @@ int name(const char *format, ...) {                                             
         fprintf(stdout, color);                                                             \
     }                                                                                       \
                                                                                             \
-    fprintf(g_logger.fp, "%s [" #tag "] ", format_time(timestamp));                         \
+    if (g_logger.fp) {                                                                      \
+        fprintf(g_logger.fp, "%s [" #tag "] ", format_time(timestamp));                     \
+        va_start(arg, format);                                                              \
+        nwriten += vfprintf(g_logger.fp, format, arg);                                      \
+        va_end(arg);                                                                        \
+    }                                                                                       \
     fprintf(stdout, "%s [" #tag "] ", format_time(timestamp));                              \
-                                                                                            \
     va_start(arg, format);                                                                  \
     vfprintf(stdout, format, arg);                                                          \
-    va_end(arg);                                                                            \
-    va_start(arg, format);                                                                  \
-    nwriten += vfprintf(g_logger.fp, format, arg);                                          \
     va_end(arg);                                                                            \
                                                                                             \
     if (LOGGER_COLOR_ON == g_logger.with_color) {                                           \
         fprintf(stdout, LOGGER_COLOR_RESET);                                                \
+        fflush(stdout);                                                                     \
     }                                                                                       \
                                                                                             \
     return nwriten;                                                                         \
