@@ -25,3 +25,6 @@ benchmark:
 	$(CC) benchmarks/timeformat.c -Ibenchmarks -o timeformat
 	./timeformat
 	rm ./timeformat
+
+clean:
+	rm -rf liblogger.*
