@@ -69,13 +69,15 @@ int logger_printf(uint8_t log_level, const char *color, const char *format, ...)
         fprintf(stdout, "%s", color);
     }
 
+    format_time(timestamp);
+
     if (g_logger.fp) {
-        fprintf(g_logger.fp, "%s ", format_time(timestamp));
+        fprintf(g_logger.fp, "%s ", timestamp);
         va_start(arg, format);
         vfprintf(g_logger.fp, format, arg);
         va_end(arg);
     }
-    fprintf(stdout, "%s ", format_time(timestamp));
+    fprintf(stdout, "%s ", timestamp);
     va_start(arg, format);
     nwritten += vfprintf(stdout, format, arg);
     va_end(arg);
