@@ -11,12 +11,12 @@ liblogger.so: logger.c
 
 test: test_color test_logger
 
-test_color:
+test_color: tests/color_test.c
 	$(CC) tests/color_test.c -o color_test
 	./color_test
 	rm ./color_test
 
-test_logger: logger.c
+test_logger: tests/logger_test.c logger.c
 	$(CC) tests/logger_test.c logger.c -I./ -o logger_test
 	./logger_test
 	rm ./logger_test
