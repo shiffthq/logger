@@ -17,11 +17,13 @@ test_color: tests/color_test.c
 	rm ./color_test
 
 test_logger_shared: tests/logger_test.c liblogger.so
+	rm -rf liblogger.a
 	$(CC) tests/logger_test.c -I./ -L. -llogger -o logger_test
 	./logger_test
 	rm ./logger_test
 
 test_logger_static: tests/logger_test.c liblogger.a
+	rm -rf liblogger.so
 	$(CC) tests/logger_test.c -I./ -L. -llogger -o logger_test
 	./logger_test
 	rm ./logger_test
