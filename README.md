@@ -19,3 +19,6 @@ logger_debug("color debug\n");
 
 logger_close();
 ```
+
+# Refers
+- [When to use the different log levels?](https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels)
