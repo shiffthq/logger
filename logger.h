@@ -62,7 +62,7 @@ int logger_printf(uint8_t log_level, const char *color, const char *format, ...)
 #define LOGGER_PREFIX "[%s] (%s:%s:%d) "
 
 #define logger_trace(format, ...)   \
-    logger_printf(LOGGER_LEVEL_TRACE, LOGGER_COLOR_CYAN, LOGGER_PREFIX format, "ERROR", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
+    logger_printf(LOGGER_LEVEL_TRACE, LOGGER_COLOR_CYAN, LOGGER_PREFIX format, "TRACE", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
 
 #define logger_debug(format, ...)   \
     logger_printf(LOGGER_LEVEL_DEBUG, LOGGER_COLOR_WHITE, LOGGER_PREFIX format, "WARN", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
@@ -77,6 +77,6 @@ int logger_printf(uint8_t log_level, const char *color, const char *format, ...)
     logger_printf(LOGGER_LEVEL_ERROR, LOGGER_COLOR_RED, LOGGER_PREFIX format, "ERROR", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
 
 #define logger_fatal(format, ...)   \
-    logger_printf(LOGGER_LEVEL_FATAL, LOGGER_COLOR_RED_BOLD, LOGGER_PREFIX format, "ERROR", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
+    logger_printf(LOGGER_LEVEL_FATAL, LOGGER_COLOR_RED_BOLD, LOGGER_PREFIX format, "FATAL", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
 
 #endif // !__LOGGER_H
