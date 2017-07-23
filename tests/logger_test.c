@@ -25,7 +25,7 @@ int main() {
     logger_trace("color trace\n");
     logger_close();
 
-    logger_init("test.log", LOGGER_LEVEL_WARNING);
+    logger_init(NULL, LOGGER_LEVEL_WARNING);
 
     printf("\n##### log with color and debug warning\n");
     logger_fatal("color fatal\n");

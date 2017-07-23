@@ -51,7 +51,7 @@ int logger_init(char *filename, uint8_t options);
  * Close logger
  *
  */
-int logger_close();
+void logger_close();
 
 /**
  * Record a log

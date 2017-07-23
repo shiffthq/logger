@@ -54,8 +54,10 @@ int logger_init(char *filename, uint8_t options) {
     return 0;
 }
 
-int logger_close() {
-    return fclose(g_logger.fp);
+void logger_close() {
+    if (NULL != g_logger.fp) {
+        fclose(g_logger.fp);
+    }
 }
 
 int logger_printf(uint8_t log_level, const char *color, const char *format, ...) {
