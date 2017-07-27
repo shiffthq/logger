@@ -1,4 +1,5 @@
 # logger
+[![Build Status](https://travis-ci.org/shiffthq/logger.svg?branch=master)](https://travis-ci.org/shiffthq/logger)
 logger in c
 
 # Feature
