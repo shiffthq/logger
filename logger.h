@@ -65,7 +65,7 @@ int logger_printf(uint8_t log_level, const char *color, const char *format, ...)
     logger_printf(LOGGER_LEVEL_TRACE, LOGGER_COLOR_CYAN, LOGGER_PREFIX format, "TRACE", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
 
 #define logger_debug(format, ...)   \
-    logger_printf(LOGGER_LEVEL_DEBUG, LOGGER_COLOR_WHITE, LOGGER_PREFIX format, "WARN", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
+    logger_printf(LOGGER_LEVEL_DEBUG, LOGGER_COLOR_WHITE, LOGGER_PREFIX format, "DEBUG", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
 
 #define logger_info(format, ...)    \
     logger_printf(LOGGER_LEVEL_INFO, LOGGER_COLOR_GREEN, LOGGER_PREFIX format, "INFO", __FILE__, __func__, __LINE__, ##__VA_ARGS__)
